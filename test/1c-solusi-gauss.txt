@@ -9,3 +9,11 @@
 0.0 0.0 0.0 0.0 1.0 -1.0 1.0
 ------------------------
 Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi tak terhingga.
+Oleh karena itu, solusi matrix berupa parametrik seperti berikut:
+x2 = 1.0 - 1.0t6
+x4 = -2.0 - 1.0t6
+x5 = 1.0 + 1.0t6
+x1 = t1
+x3 = t3
+x6 = t6
+

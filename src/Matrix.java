@@ -189,13 +189,29 @@ public class Matrix
 		}
     }
 
-    // Mengurangibaris i1 dengan konstanta kali baris i2
+    // Mengurangi baris i1 dengan konstanta kali baris i2
    	public void minusBaris(int i1, int i2, double konstanta)
    	{
 		for (int j = 0; j < this.kolom; j++)
 		{
 		    this.arr[i1][j] = (Math.round((this.arr[i1][j] - (konstanta * this.arr[i2][j])) * 100.0)/100.0);
 		}
+    }
+
+    // Mencari index pertama yang bernilai bukan 0
+    public int idxValue1(int j)
+    {
+        boolean not0 = false;
+        int idx = 0;
+        for (int i = 0; ((i < baris) && (not0 == false)); i++)
+        {
+            if (arr[i][j] != 0) 
+            {
+            	not0 = true;
+            }
+            idx = i;
+        }
+        return idx;
     }
 
 	// Menukar baris yang satu dengan baris lain
@@ -515,6 +531,5 @@ public class Matrix
 		}
 		return ans.toString();
     }
-
 
 }

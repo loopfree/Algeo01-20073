@@ -446,32 +446,54 @@ public class SPL
                     {
                         if (j == M.getLead1(i)) 
                         {
+                            // Melakukan saving ke buffer 
+                            // yang nantinya akan di lakukan
+                            // printing ke file
                             jawaban.append("x");
                         	jawaban.append(j+1);
                             jawaban.append(" = ");
                             jawaban.append(M.getElmt(i,M.getKolom()-1));
-                            jawaban.append("\n");
                         }
                         else 
                         {
                             if (M.getElmt(i,j) < 0)
                             {
                             	unik = false;
+
+                                // Melakukan saving ke buffer 
+                                // yang nantinya akan di lakukan
+                                // printing ke file
+                                jawaban.append(" + ");
+                                jawaban.append(Math.abs(M.getElmt(i,j)));
+                                jawaban.append("t");
+                                jawaban.append(j+1);
                             }
                             if (M.getElmt(i,j) > 0)
                             {
                             	unik = false;
-                            }
-                        }
-                    }
 
+                                // Melakukan saving ke buffer 
+                                // yang nantinya akan di lakukan
+                                // printing ke file
+                                jawaban.append(" - ");
+                                jawaban.append(Math.abs(M.getElmt(i,j)));
+                                jawaban.append("t");
+                                jawaban.append(j+1);
+                                
+                            }
+                        }        
+                    }
+                    jawaban.append("\n");
                 }
             }
             if (unik==true)
             {
-
+                // Melakukan printing pada terminal
                 System.out.printf("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi unik yaitu:\n");
 
+                // Melakukan saving ke buffer 
+                // yang nantinya akan di lakukan
+                // printing ke file
                 finalResult.append("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi unik yaitu:\n");
 
             	// Melakukan printing pada terminal
@@ -480,15 +502,68 @@ public class SPL
                 // Melakukan saving ke buffer 
                 // yang nantinya akan di lakukan
                 // printing ke file
-                finalResult.append(jawaban.toString() + '\n');
+                finalResult.append(jawaban.toString() + "\n");
             }
             else
             {
-                System.out.printf("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi tak terhingga.");
+                StringBuilder inf = new StringBuilder();
 
-                finalResult.append("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi tak terhingga.");
+                // Melakukan printing pada terminal
+                System.out.printf("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi tak terhingga.\n");
+                System.out.printf("Oleh karena itu, ditulis solusi matrix berupa parametrik seperti berikut:\n");
+
+                // Melakukan saving ke buffer 
+                // yang nantinya akan di lakukan
+                // printing ke file
+                finalResult.append("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi tak terhingga.\n");
+                finalResult.append("Oleh karena itu, ditulis solusi matrix berupa parametrik seperti berikut:\n");
+
+                // Melakukan printing pada terminal
+                System.out.printf(jawaban.toString());
+
+                // Melakukan saving ke buffer 
+                // yang nantinya akan di lakukan
+                // printing ke file
+                finalResult.append(jawaban.toString());
+
+                for (int j = 0; j < M.getKolom()-1; j++){
+                    if (M.isKolom0(j)) 
+                    {
+                        // Melakukan printing pada terminal
+                        System.out.printf("x%d = t%d\n", j+1, j+1);
+
+                        // Melakukan saving ke buffer 
+                        // yang nantinya akan di lakukan
+                        // printing ke file
+                        inf.append("x");
+                        inf.append(j+1);
+                        inf.append(" = ");
+                        inf.append("t");
+                        inf.append(j+1);
+                        inf.append("\n");
+                    }
+                    else if (M.getLead1(M.idxValue1(j)) != j)
+                    {  
+                        // Melakukan printing pada terminal
+                        System.out.printf("x%d = t%d\n", j+1, j+1);
+
+                        // Melakukan saving ke buffer 
+                        // yang nantinya akan di lakukan
+                        // printing ke file
+                        inf.append("x");
+                        inf.append(j+1);
+                        inf.append(" = ");
+                        inf.append("t");
+                        inf.append(j+1);
+                        inf.append("\n");
+                    }
+                }
+
+                // Melakukan saving ke buffer 
+                // yang nantinya akan di lakukan
+                // printing ke file
+                finalResult.append(inf.toString() + "\n");          
             }
-            System.out.printf("\n");
         } 
         else 
         {
