@@ -41,6 +41,7 @@ public class Menu
 					System.out.println("2. Metode eliminasi Gauss-Jordan");
 					System.out.println("3. Matriks matriks balikan");
 					System.out.println("4. Kaidah Cramer");
+					System.out.println("5. Kembali");
 					System.out.println("---------------------------------------");
 					metode = input.nextInt();
 
@@ -143,6 +144,10 @@ public class Menu
 							break;
 
 
+						case 5:
+							break;
+
+
 						default:
 							System.out.println("Input tidak valid");
 					}
@@ -161,7 +166,7 @@ public class Menu
 					System.out.println("");
 					System.out.println("1. Reduksi Baris");
 					System.out.println("2. Kofaktor");
-					System.out.println("3. Dll.");
+					System.out.println("3. Kembali");
 					System.out.println("---------------------------------------");
 					metode = input.nextInt();
 					switch(metode)
@@ -214,6 +219,10 @@ public class Menu
 							break;
 
 
+						case 3:
+							break;
+
+
 						default:
 							System.out.println("Input tidak valid");
 					}
@@ -232,7 +241,7 @@ public class Menu
 					System.out.println("");
 					System.out.println("1. Metode A");
 					System.out.println("2. Metode B");
-					System.out.println("3. Dll.");
+					System.out.println("3. Kembali");
 					System.out.println("---------------------------------------");
 					metode = input.nextInt();
 					switch(metode)
@@ -240,9 +249,17 @@ public class Menu
 						case 1:
 							System.out.println("Metode A");
 							break;
+
+
 						case 2:
 							System.out.println("Metode B");
 							break;
+
+
+						case 3:
+							break;
+
+							
 						default:
 							System.out.println("Input tidak valid");
 					}
@@ -286,7 +303,7 @@ public class Menu
 
 	static String getFileToOutput() {
 		Scanner newScanner = new Scanner(System.in);
-		System.out.println("Masukkan nama file di mana jawaban dibentuk");
+		System.out.println("Masukkan Nama File Di Mana Jawaban Akan Dibentuk");
 		return "../test/" + newScanner.nextLine() + ".txt";
 	}
 	
