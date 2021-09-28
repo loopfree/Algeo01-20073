@@ -35,6 +35,10 @@ public class Determinan
         {
             System.out.println("Baris dan kolom sebuah matrix tidak boleh bernilai negatif.");
         }
+        else if (n == 1)
+        {
+            System.out.println("Matrix 1x1 tidak memiliki determinan.");
+        }
         else
         {
             System.out.println("Silahkan Input Matrix Anda:");
