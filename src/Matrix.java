@@ -287,7 +287,7 @@ public class Matrix
 		{
 			for (int j=0; j<getKolom(); j++)
 			{
-				ans.arr[i][j] = this.arr[i][j];
+				ans.arr[i][j] = this.arr[j][i];
 			}
 		}
 		return ans;
