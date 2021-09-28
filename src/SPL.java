@@ -639,6 +639,171 @@ public class SPL
     /* ------------------------ MATRIKS BALIKAN ------------------------ */
     /* ----------------------------------------------------------------- */
 
+    public static void matriksInvers(String outFileName, boolean readFromFile, Scanner readFileScanner)
+    {
+        int row;
+    	int column;
+
+        // Menginput manual suatu matrix
+    	if(!readFromFile)
+        {
+    		System.out.print("Jumlah baris matrix: ");
+	        row = input.nextInt();
+
+    	    System.out.print("Jumlah kolom matrix: ");
+        	column = input.nextInt();	
+    	}
+        // Membaca matrix dari file.txt 
+        else
+        {
+    		row = readFileScanner.nextInt();
+    		column = readFileScanner.nextInt();
+    	}	
+        
+
+        if (row==0 || column==0)
+        {
+            System.out.println("Matrix yang Anda merupakan sebuah matrix kosong.");
+        }
+        else if (row < 0 || column < 0)
+        {
+            System.out.println("Baris dan/atau kolom sebuah matrix tidak boleh bernilai negatif.");
+        }
+        else
+        {
+            System.out.println("Silahkan Input Matrix Anda:");
+
+            Matrix M = new Matrix(row, column);
+
+            // Menginput manual suatu matrix
+            if(!readFromFile)
+            {
+            	M.readMatrix(input);
+            } 
+            // Membaca matrix dari file.txt 
+            else 
+            {
+            	M.readMatrix(readFileScanner);
+            }
+            
+            System.out.println("Matrix yang Anda inputkan adalah: ");
+            
+            // Melakukan printing pada terminal
+            System.out.print(dekorAtas("PERSOALAN"));
+            M.tulisMatrix();
+            System.out.print(dekorBawah(21));
+
+            // Melakukan saving ke buffer 
+            // yang nantinya akan di lakukan
+            // printing ke file
+            finalResult = new StringBuilder();
+            finalResult.append(dekorAtas("PERSOALAN"));
+            finalResult.append(M.toString());
+            finalResult.append(dekorBawah(21));
+
+            // Biar rapih di terminal
+            System.out.println("\n");
+
+            if (M.getKolom() == M.getBaris()+1)
+            {
+                row = M.getBaris();
+
+                //Memisahkan matriks augmented menjadi matriks A dan B
+                //Membuat matriks persegi A
+                Matrix A = new Matrix(row, row);
+                for (int i = 0; i < A.getBaris(); i++)
+                {
+                    for (int j = 0; j < A.getKolom(); j++)
+                    {
+                        A.arr[i][j] = M.arr[i][j];
+                    }
+                }
+    
+                //Membuat matriks B, yaitu kolom paling kanan dari matriks augmented
+                Matrix B = new Matrix(row, 1);
+                for (int i = 0; i < M.getBaris(); i++)
+                {
+                    B.arr[i][0] = M.arr[i][row];
+                }
+    
+                Matrix invers = new Matrix(row,row);
+                double det = DetKofaktor(A);
+    
+                //Matrix memiliki balikan
+                if (det != 0)
+                {
+                    //Membuat matrix adjoin dengan mentranspose matrix kofaktor
+                    Matrix adj = Invers.matKofaktor(A).createTranspose();
+    
+                    //Matrix balikan
+                    for (int i = 0; i < row; i++)
+                    {
+                        for (int j = 0; j < row; j++)
+                        {
+                            invers.arr[i][j] = adj.arr[i][j]/det;
+                        }
+                    }
+
+                    invers.tulisMatrix();
+    
+                    Matrix X = new Matrix(row,1);
+
+
+                    for (int i =0; i<row; i++)
+                    {
+                        X.arr[i][0] = 0;
+                        for (int k=0; k<row; k++){
+                            X.arr[i][0] += invers.arr[i][k] * B.arr[k][0];                       
+                        }
+
+                    }
+
+                    System.out.printf("Matrix memiliki solusi unik yaitu:\n");
+        
+                    finalResult.append("Matrix memiliki solusi unik yaitu:\n");
+        
+                    for(int i = 0; i < row; i++)
+                    {
+                        System.out.printf("x" + (i+1) + " = " + X.arr[i][0] + "\n");
+                        finalResult.append("x" + (i+1) + " = " + X.arr[i][0] + "\n");
+                    }
+    
+                }
+    
+                //Determinan matrix = 0, tidak memiliki balikan.
+                else 
+                {
+                    System.out.println("Karena matrix di atas tidak memiliki balikan, tidak ada solusi yang memenuhi.");
+    
+                    finalResult.append("Karena matrix di atas tidak memiliki balikan, tidak ada solusi yang memenuhi.");   
+                }
+           
+            }
+            else 
+            {
+                System.out.printf("Matrix utama dari matrix diatas bukanlah matrix persegi, sehingga tidak memiliki balikan. \nOleh karena itu, SPL ini tidak dapat diselesaikan dengan Metode Matriks Balikan.");
+                finalResult.append("Matrix utama dari matrix diatas bukanlah matrix persegi, sehingga tidak memiliki balikan. \nOleh karena itu, SPL ini tidak dapat diselesaikan dengan Metode Matriks Balikan.");
+            }
+            
+        }
+
+        try
+        {
+
+            // Melakukan printing ke file
+            FileWriter file = new FileWriter(outFileName);
+
+            PrintWriter pw = new PrintWriter(file);
+
+            pw.print(finalResult.toString());
+            pw.flush();
+        } 
+        catch(Exception e) 
+        {
+            e.getStackTrace();
+        }        
+    }
+
 
 
     /* ----------------------------------------------------------------- */

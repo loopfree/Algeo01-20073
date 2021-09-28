@@ -288,5 +288,239 @@ public class Invers
 		return result.toString();
 	}
 
+    /* ----------------------------------------------------------------- */
+    /* ----------------------- GAUSS-JORDAN ---------------------------- */
+    /* ----------------------------------------------------------------- */
 
+    public static void inversGaussJordan(String outFileName, boolean readFromFile, Scanner readFileScanner) 
+    {
+        finalResult = new StringBuilder();
+
+    	int n;
+    	// Menginput manual suatu matrix
+    	if(!readFromFile)
+        {
+    		System.out.print("Masukkan nilai n: ");
+	        n = input.nextInt();	
+    	}
+    	// Membaca matrix dari file.txt 
+        else
+        {
+    		n = readFileScanner.nextInt();
+    	}
+
+        if (n==0)
+        {
+            System.out.println("Baris dan kolom anda akan membentuk matrix kosong.");
+        }
+        else if (n < 0)
+        {
+            System.out.println("Baris dan kolom sebuah matrix tidak boleh bernilai negatif.");
+        }
+        else
+        {
+            System.out.println("Silahkan Input Matrix Anda:");
+
+            Matrix M = new Matrix(n, n);
+
+            // Asumsikan inputan pengguna sudah benar
+            // Apabila inputan pengguna salah, maka akan otomatis dibenarkan
+            // Misalnya n = 2
+            // Input pengguna berupa:
+            // 1 2 3
+            // 4 5 6
+            // Maka akan di autocorrect menjadi
+            // 1 2
+            // 3 4
+
+            // Menginput manual suatu matrix
+            if(!readFromFile)
+            {
+            	M.readMatrix(input);
+            }
+            // Membaca matrix dari file.txt 
+            else 
+            {
+            	M.readMatrix(readFileScanner);
+            }
+
+            // Melakukan printing pada terminal
+            System.out.print(dekorAtas("PERSOALAN"));
+            M.tulisMatrix();
+            System.out.print(dekorBawah(21));
+
+            // Melakukan saving ke buffer 
+            // yang nantinya akan di lakukan
+            // printing ke file
+            finalResult = new StringBuilder();
+            finalResult.append(dekorAtas("PERSOALAN"));
+            finalResult.append(M.toString());
+            finalResult.append(dekorBawah(21));
+            
+            // Membuat matriks identitas
+
+            Matrix I = new Matrix(n,n);
+
+            for (int i=0; i<n; i++)
+            {
+                for(int j=0; j<n; j++)
+                {
+                    if (i==j)
+                    {
+                        I.arr[i][j] = 1;
+                    }
+                    else
+                    {
+                        I.arr[i][j] = 0;
+                    }
+                }
+            }
+
+            /// tes
+            I.tulisMatrix();
+
+            if (!M.isMatrix0())
+            {
+                int obe = 0;
+                for (int i = 0; i < M.getBaris(); i++)
+                {
+                    if (obe < M.getKolom())
+                    {
+                        while ((M.getElmt(i,obe) == 0) && (obe < M.getKolom()-1))
+                        {
+                            int loc = M.swapBarisII0(i,obe);
+                            if ((M.getElmt(i,obe) == 0)) 
+                            {
+                                obe++;
+                            }
+                        }
+                        boolean sudahlead1 = (M.getElmt(i, obe) == 1);
+                        boolean sudahkosong = (M.getElmt(i, obe) == 0);
+                        if (!sudahlead1 && !sudahkosong)
+                        {
+                            M.setLead1(i, obe);
+                            I.setLead1(i, obe);
+                            M.tulisMatrix();
+                            I.tulisMatrix();
+                        }
+                        if ((obe < M.getKolom()) && (M.getElmt(i,obe) != 0))
+                        {
+                            for (int l = i + 1; l < M.getBaris(); l++)
+                            {
+                                if (l != i)
+                                {
+                                    double coef = M.getElmt(l,obe)/M.getElmt(i,obe);
+                                    if (coef != 0)
+                                    {
+                                        M.minusBaris(l, i, coef);
+                                        I.minusBaris(l, i, coef);
+                                        M.tulisMatrix();
+                                        I.tulisMatrix();
+                                        System.out.println("\n");
+                                    }
+                                }
+                            }
+                        }
+                        obe++;
+                    }
+                }
+            }
+
+            int obe2 = 0;
+            for (int i = 0; i < M.getBaris(); i++)
+            {
+                if (obe2 < M.getKolom())
+                {
+                    while ((M.getElmt(i,obe2) == 0) && (obe2 < M.getKolom()-1))
+                    {
+                        int loc = M.swapBarisII0(i,obe2);
+                        if ((M.getElmt(i,obe2) == 0))
+                        {
+                            obe2++;
+                        }
+                    }
+                    boolean sudahlead1 = (M.getElmt(i, obe2) == 1);
+                    boolean sudahkosong = (M.getElmt(i, obe2) == 0);
+                    if (!sudahlead1 && !sudahkosong)
+                    {
+                        M.setLead1(i, obe2);
+                        I.setLead1(i, obe2);
+                        M.tulisMatrix();
+                        I.tulisMatrix();
+                    }
+                    if ((obe2 < M.getKolom()) && (M.getElmt(i,obe2) != 0))
+                    {
+                        for (int l = 0; l < M.getBaris(); l++)
+                        {
+                            if (l != i)
+                            {
+                                double coef = M.getElmt(l,obe2)/M.getElmt(i,obe2);
+                                if (coef != 0)
+                                {
+                                    M.minusBaris(l, i, coef);
+                                    I.minusBaris(l, i, coef);
+                                    M.tulisMatrix();
+                                    I.tulisMatrix();
+                                    System.out.println("\n");
+                                }
+                            }
+                        }
+                    }
+                    obe2++;
+                }
+            }
+
+            if (!M.isIdentitas())
+            {
+                System.out.print("Karena ada baris bernilai 0, matrix tidak memiliki balikan");
+                finalResult.append("Karena ada baris bernilai 0, maka matrix tidak memiliki balikan.");   
+            }
+            else
+            {
+                // Melakukan printing pada terminal
+                System.out.print(dekorAtas("PENYELESAIAN"));
+                M.tulisMatrix();
+                System.out.print(dekorBawah(24));
+                
+                // Melakukan saving ke buffer 
+                // yang nantinya akan di lakukan
+                // printing ke file
+                finalResult.append(dekorAtas("PENYELESAIAN"));
+                finalResult.append(M.toString());
+                finalResult.append(dekorBawah(24));
+
+                // Melakukan printing pada terminal
+                System.out.print(dekorAtas("PENYELESAIAN"));
+                I.tulisMatrix();
+                System.out.print(dekorBawah(24));
+                
+                // Melakukan saving ke buffer 
+                // yang nantinya akan di lakukan
+                // printing ke file
+                finalResult.append(dekorAtas("PENYELESAIAN"));
+                finalResult.append(I.toString());
+                finalResult.append(dekorBawah(24));
+
+            }
+
+            try
+			{
+	
+				// Melakukan printing ke file
+				FileWriter file = new FileWriter(outFileName);
+	
+				PrintWriter pw = new PrintWriter(file);
+	
+				pw.print(finalResult.toString());
+				pw.flush();
+			} 
+			catch(Exception e) 
+			{
+				e.getStackTrace();
+			}
+
+        
+            
+    }  
+}
 }

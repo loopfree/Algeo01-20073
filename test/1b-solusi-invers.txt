@@ -1,0 +1,8 @@
+------PERSOALAN------
+1.0 -1.0 0.0 0.0 1.0 3.0
+1.0 1.0 0.0 -3.0 0.0 6.0
+2.0 -1.0 0.0 1.0 -1.0 5.0
+-1.0 2.0 0.0 -2.0 -1.0 -1.0
+---------------------
+Matrix utama dari matrix diatas bukanlah matrix persegi, sehingga tidak memiliki balikan. 
+Oleh karena itu, SPL ini tidak dapat diselesaikan dengan Metode Matriks Balikan.

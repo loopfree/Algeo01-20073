@@ -39,7 +39,7 @@ public class Menu
 					System.out.println("");
 					System.out.println("1. Metode eliminasi Gauss");
 					System.out.println("2. Metode eliminasi Gauss-Jordan");
-					System.out.println("3. Matriks matriks balikan");
+					System.out.println("3. Metode matriks balikan");
 					System.out.println("4. Kaidah Cramer");
 					System.out.println("5. Kembali");
 					System.out.println("---------------------------------------");
@@ -136,6 +136,45 @@ public class Menu
 
 						case 3:
 							System.out.println("Balikan");
+							System.out.println("---------------------------------------");
+							System.out.println("Pilih Cara Menginput Matrix");
+							System.out.println("");
+							System.out.println("1. Metode Manual");
+							System.out.println("2. Metode Baca File");
+							System.out.println("---------------------------------------");
+							masuk = input.nextInt();
+
+							if (masuk== 1)
+							{
+								// Menulis hasil ke file.txt
+								fileName = getFileToOutput();
+								SPL.matriksInvers(fileName, false, null);
+							}
+							else if (masuk == 2)
+							{	
+								try
+								{
+									// Menulis hasil ke file.txt
+									Scanner read = new Scanner(System.in);
+									System.out.println("Masukkan Nama File yang Ingin Dibaca(Tanpa Ext)");
+									String namaFile = read.nextLine();
+									namaFile = "../test/" + namaFile + ".txt";
+									File file = new File(namaFile);
+									Scanner nama = new Scanner(file);
+
+									// Menulis hasil ke file.txt
+									fileName = getFileToOutput();
+									SPL.matriksInvers(fileName, true, nama);
+								}
+								catch(Exception e) 
+						        {
+							   		e.getStackTrace();
+							   	}
+							}
+							else
+							{
+								System.out.println("Input Tidak Valid");
+							}
 							break;
 
 
@@ -318,7 +357,7 @@ public class Menu
 					System.out.println("Pilih Metode yang Ingin Digunakan");
 					System.out.println("");
 					System.out.println("1. Adjoin");
-					System.out.println("2. Metode B");
+					System.out.println("2. Gauss-Jordan");
 					System.out.println("3. Kembali");
 					System.out.println("---------------------------------------");
 					metode = input.nextInt();
@@ -369,7 +408,46 @@ public class Menu
 
 
 						case 2:
-							System.out.println("Metode B");
+							System.out.println("Gauss-Jordan");
+							System.out.println("---------------------------------------");
+							System.out.println("Pilih Cara Menginput Matrix");
+							System.out.println("");
+							System.out.println("1. Metode Manual");
+							System.out.println("2. Metode Baca File");
+							System.out.println("---------------------------------------");
+							masuk = input.nextInt();
+	
+							if (masuk== 1)
+							{
+								// Menulis hasil ke file.txt
+								fileName = getFileToOutput();
+								Invers.inversGaussJordan(fileName, false, null);
+							}
+							else if (masuk == 2)
+							{	
+								try
+								{
+									// Membaca suatu file.txt
+									Scanner read = new Scanner(System.in);
+									System.out.println("Masukkan Nama File yang Ingin Dibaca(Tanpa Ext)");
+									String namaFile = read.nextLine();
+									namaFile = "../test/" + namaFile + ".txt";
+									File file = new File(namaFile);
+									Scanner nama = new Scanner(file);
+	
+									// Menulis hasil ke file.txt
+									fileName = getFileToOutput();
+									Invers.inversGaussJordan(fileName, true, nama);
+								}
+								catch(Exception e) 
+								{
+									   e.getStackTrace();
+								   }
+							}
+							else
+							{
+								System.out.println("Input Tidak Valid");
+							}
 							break;
 
 
