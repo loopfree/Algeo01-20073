@@ -644,7 +644,211 @@ public class SPL
     /* ----------------------------------------------------------------- */
     /* ---------------------------- CRAMER ----------------------------- */
     /* ----------------------------------------------------------------- */
+    public static void kaidahCramer(String outFileName, boolean readFromFile, Scanner readFileScanner)
+    {
+        int row;
+    	int column;
 
+        // Menginput manual suatu matrix
+    	if(!readFromFile)
+        {
+    		System.out.print("Jumlah baris matrix: ");
+	        row = input.nextInt();
+
+    	    System.out.print("Jumlah kolom matrix: ");
+        	column = input.nextInt();	
+    	}
+        // Membaca matrix dari file.txt 
+        else
+        {
+    		row = readFileScanner.nextInt();
+    		column = readFileScanner.nextInt();
+    	}	
+        
+
+        if (row==0 || column==0)
+        {
+            System.out.println("Matrix yang Anda merupakan sebuah matrix kosong.");
+        }
+        else if (row < 0 || column < 0)
+        {
+            System.out.println("Baris dan/atau kolom sebuah matrix tidak boleh bernilai negatif.");
+        }
+        else
+        {
+            System.out.println("Silahkan Input Matrix Anda:");
+
+            Matrix M = new Matrix(row, column);
+
+            // Menginput manual suatu matrix
+            if(!readFromFile)
+            {
+            	M.readMatrix(input);
+            } 
+            // Membaca matrix dari file.txt 
+            else 
+            {
+            	M.readMatrix(readFileScanner);
+            }
+            
+            System.out.println("Matrix yang Anda inputkan adalah: ");
+            
+            // Melakukan printing pada terminal
+            System.out.print(dekorAtas("PERSOALAN"));
+            M.tulisMatrix();
+            System.out.print(dekorBawah(21));
+
+            // Melakukan saving ke buffer 
+            // yang nantinya akan di lakukan
+            // printing ke file
+            finalResult = new StringBuilder();
+            finalResult.append(dekorAtas("PERSOALAN"));
+            finalResult.append(M.toString());
+            finalResult.append(dekorBawah(21));
+
+            // Biar rapih di terminal
+            System.out.println("\n");
+
+            if (M.getKolom() == M.getBaris()+1)
+            {
+                row = M.getBaris();
+
+                //Memisahkan matriks augmented menjadi matriks A dan B
+                //Membuat matriks persegi A
+                Matrix A = new Matrix(row, row);
+                for (int i = 0; i < A.getBaris(); i++)
+                {
+                    for (int j = 0; j < A.getKolom(); j++)
+                    {
+                        A.arr[i][j] = M.arr[i][j];
+                    }
+                }
+    
+                //Membuat matriks B, yaitu kolom paling kanan dari matriks augmented
+                Matrix B = new Matrix(row, 1);
+                for (int i = 0; i < M.getBaris(); i++)
+                {
+                    B.arr[i][0] = M.arr[i][row];
+                }
+    
+                double detA = DetKofaktor(A);
+                if (detA == 0)
+                {
+                    System.out.println("Determinan dari matrix utamanya adalah 0, sehingga tidak dapat ditentukan solusinya.");
+        
+                    finalResult.append("Determinan dari matrix utamanya adalah 0, sehingga tidak dapat ditentukan solusinya.");
+                }
+        
+                else 
+                {
+                    Matrix temp = new Matrix(row, row);
+                    double[] x = new double[row];
+                    for (int i = 0; i < row; i++)
+                    {
+                        for (int j = 0; j < row; j++)
+                        {
+                            for (int k = 0; k < row; k++)
+                            {
+                                if (k == i)
+                                {
+                                    temp.arr[j][k] = B.arr[j][0];
+                                }
+        
+                                else
+                                {
+                                    temp.arr[j][k] = A.arr[j][k];
+                                }
+                            }
+                        }
+                        x[i] = DetKofaktor(temp)/ detA;
+                    }
+        
+                    System.out.printf("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi unik yaitu:\n");
+        
+                    finalResult.append("Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi unik yaitu:\n");
+        
+                    for(int i = 0; i < row; i++)
+                    {
+                        System.out.printf("x" + (i+1) + " = " + x[i] + "\n");
+                        finalResult.append("x" + (i+1) + " = " + x[i] + "\n");
+                    }
+
+                }
+           
+            }
+            else 
+            {
+                System.out.printf("Matrix utama dari matrix diatas bukanlah matrix persegi, sehingga tidak dapat dihitung determinannya. \nOleh karena itu, SPL ini tidak dapat diselesaikan dengan Metode Cramer.");
+                finalResult.append("Matrix utama dari matrix diatas bukanlah matrix persegi, sehingga tidak dapat dihitung determinannya. \nOleh karena itu, SPL ini tidak dapat diselesaikan dengan Metode Cramer.");
+            }
+            
+        }
+
+        try
+        {
+
+            // Melakukan printing ke file
+            FileWriter file = new FileWriter(outFileName);
+
+            PrintWriter pw = new PrintWriter(file);
+
+            pw.print(finalResult.toString());
+            pw.flush();
+        } 
+        catch(Exception e) 
+        {
+            e.getStackTrace();
+        }
+    }
+    
+
+    private static double DetKofaktor(Matrix M) 
+	{
+		int i,j,k,x,y;
+		double det;
+		Matrix temp = new Matrix(M.getBaris() - 1, M.getKolom()-1);
+
+		//Matriks 2x2
+		if (M.getBaris() == 2 && M.getKolom() == 2)
+		{
+			return (M.getElmt(0, 0)*M.getElmt(1, 1) - M.getElmt(0, 1)* M.getElmt(1, 0));
+		}
+
+		//Membuat minor dari matriks
+		else
+		{
+			det = 0;
+			for ( i = 0; i < M.getBaris(); i++)
+			{
+				x = 0;
+				for (j = 1; j < M.getKolom(); j++)
+				{
+					y = 0;
+					for (k = 0; k < M.getBaris(); k++)
+					{
+						if ( k != i)
+						{
+							temp.arr[x][y] = M.arr[j][k];
+							y++;
+						}
+					}
+					x++;
+				}
+
+				//Menghitung determinan kofaktor secara baris
+				if (i % 2 == 0)
+				{
+					det += M.getElmt(0, i) * DetKofaktor(temp); 
+				}
+				
+				else 
+				{
+					det -= M.getElmt(0, i) * DetKofaktor(temp);
+				}
+			}
+			return det;
+		}
+	 }
 
 
 }
