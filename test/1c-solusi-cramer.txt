@@ -1,0 +1,6 @@
+------PERSOALAN------
+0.0 1.0 0.0 0.0 1.0 0.0 2.0
+0.0 0.0 0.0 1.0 1.0 0.0 -1.0
+0.0 1.0 0.0 0.0 0.0 1.0 1.0
+---------------------
+Determinan dari matrix utamanya adalah 0, sehingga tidak dapat ditentukan solusinya.
