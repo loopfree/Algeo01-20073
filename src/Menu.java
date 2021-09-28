@@ -141,6 +141,45 @@ public class Menu
 
 						case 4:
 							System.out.println("Cramer");
+							System.out.println("---------------------------------------");
+							System.out.println("Pilih Cara Menginput Matrix");
+							System.out.println("");
+							System.out.println("1. Metode Manual");
+							System.out.println("2. Metode Baca File");
+							System.out.println("---------------------------------------");
+							masuk = input.nextInt();
+
+							if (masuk== 1)
+							{
+								// Menulis hasil ke file.txt
+								fileName = getFileToOutput();
+								SPL.kaidahCramer(fileName, false, null);
+							}
+							else if (masuk == 2)
+							{	
+								try
+								{
+									// Menulis hasil ke file.txt
+									Scanner read = new Scanner(System.in);
+									System.out.println("Masukkan Nama File yang Ingin Dibaca(Tanpa Ext)");
+									String namaFile = read.nextLine();
+									namaFile = "../test/" + namaFile + ".txt";
+									File file = new File(namaFile);
+									Scanner nama = new Scanner(file);
+
+									// Menulis hasil ke file.txt
+									fileName = getFileToOutput();
+									SPL.kaidahCramer(fileName, true, nama);
+								}
+								catch(Exception e) 
+						        {
+							   		e.getStackTrace();
+							   	}
+							}
+							else
+							{
+								System.out.println("Input Tidak Valid");
+							}
 							break;
 
 
@@ -216,6 +255,45 @@ public class Menu
 
 						case 2:
 							System.out.println("Kofaktor");
+							System.out.println("---------------------------------------");
+							System.out.println("Pilih Cara Menginput Matrix");
+							System.out.println("");
+							System.out.println("1. Metode Manual");
+							System.out.println("2. Metode Baca File");
+							System.out.println("---------------------------------------");
+							masuk = input.nextInt();
+
+							if (masuk== 1)
+							{
+								// Menulis hasil ke file.txt
+								fileName = getFileToOutput();
+								Determinan.Kofaktor(fileName, false, null);
+							}
+							else if (masuk == 2)
+							{	
+								try
+								{
+									// Membaca suatu file.txt
+									Scanner read = new Scanner(System.in);
+									System.out.println("Masukkan Nama File yang Ingin Dibaca(Tanpa Ext)");
+									String namaFile = read.nextLine();
+									namaFile = "../test/" + namaFile + ".txt";
+									File file = new File(namaFile);
+									Scanner nama = new Scanner(file);
+
+									// Menulis hasil ke file.txt
+									fileName = getFileToOutput();
+									Determinan.Kofaktor(fileName, true, nama);
+								}
+								catch(Exception e) 
+						        {
+							   		e.getStackTrace();
+							   	}
+							}
+							else
+							{
+								System.out.println("Input Tidak Valid");
+							}
 							break;
 
 
@@ -239,7 +317,7 @@ public class Menu
 					System.out.println("---------------------------------------");
 					System.out.println("Pilih Metode yang Ingin Digunakan");
 					System.out.println("");
-					System.out.println("1. Metode A");
+					System.out.println("1. Adjoin");
 					System.out.println("2. Metode B");
 					System.out.println("3. Kembali");
 					System.out.println("---------------------------------------");
@@ -247,7 +325,46 @@ public class Menu
 					switch(metode)
 					{
 						case 1:
-							System.out.println("Metode A");
+						System.out.println("Adjoin");
+						System.out.println("---------------------------------------");
+						System.out.println("Pilih Cara Menginput Matrix");
+						System.out.println("");
+						System.out.println("1. Metode Manual");
+						System.out.println("2. Metode Baca File");
+						System.out.println("---------------------------------------");
+						masuk = input.nextInt();
+
+						if (masuk== 1)
+						{
+							// Menulis hasil ke file.txt
+							fileName = getFileToOutput();
+							Invers.inversAdjoin(fileName, false, null);
+						}
+						else if (masuk == 2)
+						{	
+							try
+							{
+								// Membaca suatu file.txt
+								Scanner read = new Scanner(System.in);
+								System.out.println("Masukkan Nama File yang Ingin Dibaca(Tanpa Ext)");
+								String namaFile = read.nextLine();
+								namaFile = "../test/" + namaFile + ".txt";
+								File file = new File(namaFile);
+								Scanner nama = new Scanner(file);
+
+								// Menulis hasil ke file.txt
+								fileName = getFileToOutput();
+								Invers.inversAdjoin(fileName, true, nama);
+							}
+							catch(Exception e) 
+							{
+								   e.getStackTrace();
+							   }
+						}
+						else
+						{
+							System.out.println("Input Tidak Valid");
+						}
 							break;
 
 
