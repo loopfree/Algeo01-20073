@@ -226,7 +226,145 @@ public class Determinan
     /* ----------------------------------------------------------------- */
     /* --------------------------- KOFAKTOR ---------------------------- */
     /* ----------------------------------------------------------------- */
+	public static void Kofaktor(String outFileName, boolean readFromFile, Scanner readFileScanner) 
+	{
+    	finalResult = new StringBuilder();
 
+    	int n;
+    	// Menginput manual suatu matrix
+    	if(!readFromFile)
+        {
+    		System.out.print("Masukkan nilai n: ");
+	        n = input.nextInt();	
+    	}
+    	// Membaca matrix dari file.txt 
+        else
+        {
+    		n = readFileScanner.nextInt();
+    	}
 
+        if (n==0)
+        {
+            System.out.println("Baris dan kolom anda akan membentuk matrix kosong.");
+        }
+        else if (n < 0)
+        {
+            System.out.println("Baris dan kolom sebuah matrix tidak boleh bernilai negatif.");
+        }
+        else
+        {
+            System.out.println("Silahkan Input Matrix Anda:");
 
+            Matrix M = new Matrix(n, n);
+
+            // Asumsikan inputan pengguna sudah benar
+            // Apabila inputan pengguna salah, maka akan otomatis dibenarkan
+            // Misalnya n = 2
+            // Input pengguna berupa:
+            // 1 2 3
+            // 4 5 6
+            // Maka akan di autocorrect menjadi
+            // 1 2
+            // 3 4
+
+            // Menginput manual suatu matrix
+            if(!readFromFile)
+            {
+            	M.readMatrix(input);
+            }
+            // Membaca matrix dari file.txt 
+            else 
+            {
+            	M.readMatrix(readFileScanner);
+            }
+
+            // Melakukan printing pada terminal
+            System.out.print(dekorAtas("PERSOALAN"));
+            M.tulisMatrix();
+            System.out.print(dekorBawah(21));
+
+            // Melakukan saving ke buffer 
+            // yang nantinya akan di lakukan
+            // printing ke file
+            finalResult = new StringBuilder();
+            finalResult.append(dekorAtas("PERSOALAN"));
+            finalResult.append(M.toString());
+            finalResult.append(dekorBawah(21));
+
+			System.out.printf("Dengan menggunakan metode ekspansi kofaktor, diperoleh hasil determinan dari matrix adalah: \n");
+			finalResult.append("Dengan menggunakan metode ekspansi kofaktor, diperoleh hasil determinan dari matrix adalah: \n");
+
+			//Hasil perhitungan
+			double ans;
+			ans = DetKofaktor(M);
+			System.out.println(ans);
+			finalResult.append(ans);
+
+			try
+			{
+	
+				// Melakukan printing ke file
+				FileWriter file = new FileWriter(outFileName);
+	
+				PrintWriter pw = new PrintWriter(file);
+	
+				pw.print(finalResult.toString());
+				pw.flush();
+			} 
+			catch(Exception e) 
+			{
+				e.getStackTrace();
+			}
+
+		}
+	}
+
+	//Fungsi untuk menghitung determinan dengan Kofaktor
+	public static double DetKofaktor(Matrix M) 
+	{
+		int i,j,k,x,y;
+		double det;
+		Matrix temp = new Matrix(M.getBaris() - 1, M.getKolom()-1);
+
+		//Matriks 2x2
+		if (M.getBaris() == 2 && M.getKolom() == 2)
+		{
+			return (M.getElmt(0, 0)*M.getElmt(1, 1) - M.getElmt(0, 1)* M.getElmt(1, 0));
+		}
+
+		//Membuat minor dari matriks
+		else
+		{
+			det = 0;
+			for ( i = 0; i < M.getBaris(); i++)
+			{
+				x = 0;
+				for (j = 1; j < M.getKolom(); j++)
+				{
+					y = 0;
+					for (k = 0; k < M.getBaris(); k++)
+					{
+						if ( k != i)
+						{
+							temp.arr[x][y] = M.arr[j][k];
+							y++;
+						}
+					}
+					x++;
+				}
+
+				//Menghitung determinan kofaktor secara baris
+				if (i % 2 == 0)
+				{
+					det += M.getElmt(0, i) * DetKofaktor(temp); 
+				}
+				
+				else 
+				{
+					det -= M.getElmt(0, i) * DetKofaktor(temp);
+				}
+			}
+			return det;
+		}
+	} 
 }
