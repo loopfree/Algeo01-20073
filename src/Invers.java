@@ -376,8 +376,6 @@ public class Invers
                 }
             }
 
-            /// tes
-            I.tulisMatrix();
 
             if (!M.isMatrix0())
             {
@@ -397,10 +395,16 @@ public class Invers
                         boolean sudahkosong = (M.getElmt(i, obe) == 0);
                         if (!sudahlead1 && !sudahkosong)
                         {
+                            if ((M.getElmt(i,obe) != 1) && (M.getElmt(i,obe) != 0))
+                            {
+                                double koefisien = M.getElmt(i,obe);
+                                for (int j=0; j<M.getKolom(); j++)
+                                {
+                                    I.setElmt(i,j, I.getElmt(i,j) / koefisien);
+                                }
+                            }
+
                             M.setLead1(i, obe);
-                            I.setLead1(i, obe);
-                            M.tulisMatrix();
-                            I.tulisMatrix();
                         }
                         if ((obe < M.getKolom()) && (M.getElmt(i,obe) != 0))
                         {
@@ -413,9 +417,6 @@ public class Invers
                                     {
                                         M.minusBaris(l, i, coef);
                                         I.minusBaris(l, i, coef);
-                                        M.tulisMatrix();
-                                        I.tulisMatrix();
-                                        System.out.println("\n");
                                     }
                                 }
                             }
@@ -441,10 +442,17 @@ public class Invers
                     boolean sudahkosong = (M.getElmt(i, obe2) == 0);
                     if (!sudahlead1 && !sudahkosong)
                     {
+                        if ((M.getElmt(i,obe2) != 1) && (M.getElmt(i,obe2) != 0))
+                        {
+                            double koefisien = M.getElmt(i,obe2);
+                            for (int j=0; j<M.getKolom(); j++)
+                            {
+                                I.setElmt(i,j, I.getElmt(i,j) / koefisien);
+                            }
+                        }
+
                         M.setLead1(i, obe2);
-                        I.setLead1(i, obe2);
-                        M.tulisMatrix();
-                        I.tulisMatrix();
+
                     }
                     if ((obe2 < M.getKolom()) && (M.getElmt(i,obe2) != 0))
                     {
@@ -457,9 +465,6 @@ public class Invers
                                 {
                                     M.minusBaris(l, i, coef);
                                     I.minusBaris(l, i, coef);
-                                    M.tulisMatrix();
-                                    I.tulisMatrix();
-                                    System.out.println("\n");
                                 }
                             }
                         }
@@ -475,17 +480,7 @@ public class Invers
             }
             else
             {
-                // Melakukan printing pada terminal
-                System.out.print(dekorAtas("PENYELESAIAN"));
-                M.tulisMatrix();
-                System.out.print(dekorBawah(24));
-                
-                // Melakukan saving ke buffer 
-                // yang nantinya akan di lakukan
-                // printing ke file
-                finalResult.append(dekorAtas("PENYELESAIAN"));
-                finalResult.append(M.toString());
-                finalResult.append(dekorBawah(24));
+
 
                 // Melakukan printing pada terminal
                 System.out.print(dekorAtas("PENYELESAIAN"));
