@@ -467,7 +467,46 @@ public class Menu
 				/* ---------------- INTERPOLASI POLINOM ---------------- */
 				/* ----------------------------------------------------- */
 				case 4:
-					System.out.println("Interpolasi Polinom");
+				System.out.println("Interpolasi Polinom");
+				System.out.println("---------------------------------------");
+				System.out.println("Pilih Cara Menginput Masukan");
+				System.out.println("");
+				System.out.println("1. Metode Manual");
+				System.out.println("2. Metode Baca File");
+				System.out.println("---------------------------------------");
+				masuk = input.nextInt();
+
+				if (masuk== 1)
+				{
+					// Menulis hasil ke file.txt
+					fileName = getFileToOutput();
+					Interpolasi.interpolasiPolinom(fileName, false, null);
+				}
+				else if (masuk == 2)
+				{	
+					try
+					{
+						// Menulis hasil ke file.txt
+						Scanner read = new Scanner(System.in);
+						System.out.println("Masukkan Nama File yang Ingin Dibaca(Tanpa Ext)");
+						String namaFile = read.nextLine();
+						namaFile = "../test/" + namaFile + ".txt";
+						File file = new File(namaFile);
+						Scanner nama = new Scanner(file);
+
+						// Menulis hasil ke file.txt
+						fileName = getFileToOutput();
+						Interpolasi.interpolasiPolinom(fileName, true, nama);
+					}
+					catch(Exception e) 
+					{
+						   e.getStackTrace();
+					   }
+				}
+				else
+				{
+					System.out.println("Input Tidak Valid");
+				}
 					break;
 
 
