@@ -11,9 +11,9 @@
 0.0 0.0 0.0 0.0 0.0
 ------------------------
 Dari matrix di atas, dapat dilihat bahwa matrix memiliki solusi tak terhingga.
-Oleh karena itu, solusi matrix berupa parametrik seperti berikut:
-x1 = -1.0 + 1.0t4
-x2 = 0.0 + 2.0t3
-x3 = t3
-x4 = t4
+Oleh karena itu, ditulis solusi matrix berupa parametrik seperti berikut:
+x1 = -1.0 + 1.0d
+x2 = 0.0 + 2.0c
+x3 = c
+x4 = d
 

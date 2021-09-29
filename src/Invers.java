@@ -388,7 +388,6 @@ public class Invers
                     {
                         while ((M.getElmt(i,obe) == 0) && (obe < M.getKolom()-1))
                         {
-                            int loc = M.swapBarisII0(i,obe);
                             if ((M.getElmt(i,obe) == 0)) 
                             {
                                 obe++;
@@ -433,7 +432,6 @@ public class Invers
                 {
                     while ((M.getElmt(i,obe2) == 0) && (obe2 < M.getKolom()-1))
                     {
-                        int loc = M.swapBarisII0(i,obe2);
                         if ((M.getElmt(i,obe2) == 0))
                         {
                             obe2++;

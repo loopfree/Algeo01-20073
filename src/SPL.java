@@ -225,7 +225,6 @@ public class SPL
                     {
                         while ((M.getElmt(i,obe) == 0) && (obe < M.getKolom()-1))
                         {
-                            int loc = M.swapBarisII0(i,obe);
                             if ((M.getElmt(i,obe) == 0))
                             {
                                 obe++;
@@ -346,7 +345,6 @@ public class SPL
                     {
                         while ((M.getElmt(i,obe) == 0) && (obe < M.getKolom()-1))
                         {
-                            int loc = M.swapBarisII0(i,obe);
                             if ((M.getElmt(i,obe) == 0)) 
                             {
                                 obe++;
@@ -389,7 +387,6 @@ public class SPL
             {
                 while ((M.getElmt(i,obe) == 0) && (obe < M.getKolom()-1))
                 {
-                    int loc = M.swapBarisII0(i,obe);
                     if ((M.getElmt(i,obe) == 0))
                     {
                         obe++;
@@ -435,13 +432,43 @@ public class SPL
 
         if (Matrix.isSolvable(M))
         {
+            // Membuat array of alphabet
+            // Array ini nantinya akan digunakan untuk
+            // membuat hasil dalam bentuk parametrik
+            ArrayList<Character> alphArr = new ArrayList<Character>();
+            alphArr.add('a');
+            alphArr.add('b');
+            alphArr.add('c');
+            alphArr.add('d');
+            alphArr.add('e');
+            alphArr.add('f');
+            alphArr.add('g');
+            alphArr.add('h');
+            alphArr.add('i');
+            alphArr.add('j');
+            alphArr.add('k');
+            alphArr.add('l');
+            alphArr.add('m');
+            alphArr.add('n');
+            alphArr.add('o');
+            alphArr.add('p');
+            alphArr.add('q');
+            alphArr.add('r');
+            alphArr.add('s');
+            alphArr.add('t');
+            alphArr.add('u');
+            alphArr.add('v');
+            alphArr.add('w');
+            alphArr.add('x');
+            alphArr.add('y');
+            alphArr.add('z');
+
             StringBuilder jawaban = new StringBuilder();
             boolean unik = true;
             for (int i = 0; i < M.getBaris(); i++)
             {
                 if (!M.isBaris0(i))
                 {
-                    
                     for (int j = M.getLead1(i); j < M.getKolom()-1; j++)
                     {
                         if (j == M.getLead1(i)) 
@@ -465,8 +492,9 @@ public class SPL
                                 // printing ke file
                                 jawaban.append(" + ");
                                 jawaban.append(Math.abs(M.getElmt(i,j)));
-                                jawaban.append("t");
-                                jawaban.append(j+1);
+                                jawaban.append(alphArr.get(j));
+                                // jawaban.append("t");
+                                // jawaban.append(j+1);
                             }
                             if (M.getElmt(i,j) > 0)
                             {
@@ -477,8 +505,9 @@ public class SPL
                                 // printing ke file
                                 jawaban.append(" - ");
                                 jawaban.append(Math.abs(M.getElmt(i,j)));
-                                jawaban.append("t");
-                                jawaban.append(j+1);
+                                jawaban.append(alphArr.get(j));
+                                // jawaban.append("t");
+                                // jawaban.append(j+1);
                                 
                             }
                         }        
@@ -530,7 +559,7 @@ public class SPL
                     if (M.isKolom0(j)) 
                     {
                         // Melakukan printing pada terminal
-                        System.out.printf("x%d = t%d\n", j+1, j+1);
+                        System.out.printf("x%d = %c\n", j+1, alphArr.get(j));
 
                         // Melakukan saving ke buffer 
                         // yang nantinya akan di lakukan
@@ -538,14 +567,15 @@ public class SPL
                         inf.append("x");
                         inf.append(j+1);
                         inf.append(" = ");
-                        inf.append("t");
-                        inf.append(j+1);
+                        inf.append(alphArr.get(j));
+                        // inf.append("t");
+                        // inf.append(j+1);
                         inf.append("\n");
                     }
                     else if (M.getLead1(M.idxValue1(j)) != j)
                     {  
                         // Melakukan printing pada terminal
-                        System.out.printf("x%d = t%d\n", j+1, j+1);
+                        System.out.printf("x%d = %c\n", j+1, alphArr.get(j));
 
                         // Melakukan saving ke buffer 
                         // yang nantinya akan di lakukan
@@ -553,8 +583,9 @@ public class SPL
                         inf.append("x");
                         inf.append(j+1);
                         inf.append(" = ");
-                        inf.append("t");
-                        inf.append(j+1);
+                        inf.append(alphArr.get(j));
+                        // inf.append("t");
+                        // inf.append(j+1);
                         inf.append("\n");
                     }
                 }

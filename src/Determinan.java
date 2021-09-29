@@ -131,7 +131,6 @@ public class Determinan
 	            {
 	                if (M.getElmt(i,i) == 0)
 	                {
-	                    int loc = M.swapBarisII0(i,i);
 	                    // Tidak ada yang bisa di swap, artinya kolom bernilai 0 semua.
 	                    if (M.getElmt(i,i) == 0)
 	                    {
