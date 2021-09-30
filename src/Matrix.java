@@ -185,7 +185,7 @@ public class Matrix
 	{
 		for (int j = 0; j < this.kolom; j++)
 		{
-		    this.arr[i1][j] = (Math.round((this.arr[i1][j] + (konstanta * this.arr[i2][j])) * 100.0)/100.0);
+		    this.arr[i1][j] = this.arr[i1][j] + (konstanta * this.arr[i2][j]);
 		}
     }
 
@@ -194,7 +194,7 @@ public class Matrix
    	{
 		for (int j = 0; j < this.kolom; j++)
 		{
-		    this.arr[i1][j] = (Math.round((this.arr[i1][j] - (konstanta * this.arr[i2][j])) * 100.0)/100.0);
+		    this.arr[i1][j] = this.arr[i1][j] - (konstanta * this.arr[i2][j]);
 		}
     }
 

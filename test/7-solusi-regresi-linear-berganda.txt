@@ -43,17 +43,17 @@ Display Matrix Augmented
 587.8399999999999 25283.395 44976.866999999984 17278.508600000005 571.1219000000001
 
 Setelah menjalankan OBE pada matrix di atasDari matrix di atas, dapat dilihat bahwa matrix memiliki solusi unik yaitu:
-x0 = -3.72
-x1 = 0.0
-x2 = 0.0
-x3 = 0.16129032258064518
+x0 = -3.5077781408835103
+x1 = -0.002624990745878327
+x2 = 7.989410472218274E-4
+x3 = 0.15415503019830143
 
 Diperoleh persamaan regresi linear berganda berupa:
-y = -3.72 + 0.0x1 + 0.0x2 + 0.16129032258064518x3
+y = -3.5077781408835103 + -0.002624990745878327x1 + 7.989410472218274E-4x2 + 0.15415503019830143x3
 
 Melakukan pengujian dengan input manual
 Masukkan nilai x1: 50.0
 Masukkan nilai x2: 76.0
 Masukkan nilai x3: 29.3
 
-Hasilnya adalah: 1.0058064516129037
+Hasilnya adalah: 0.9384342262216645
