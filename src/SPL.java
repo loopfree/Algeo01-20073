@@ -804,9 +804,9 @@ public class SPL
                 //Determinan matrix = 0, tidak memiliki balikan.
                 else 
                 {
-                    System.out.println("Karena matrix di atas tidak memiliki balikan, tidak ada solusi yang memenuhi.");
+                    System.out.println("Karena matrix di atas tidak memiliki balikan, SPL tidak memiliki solusi unik.");
     
-                    finalResult.append("Karena matrix di atas tidak memiliki balikan, tidak ada solusi yang memenuhi.");   
+                    finalResult.append("Karena matrix di atas tidak memiliki balikan, SPL tidak memiliki solusi unik.");   
                 }
            
             }

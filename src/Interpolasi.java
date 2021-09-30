@@ -137,6 +137,7 @@ public class Interpolasi
                 // Melakukan saving ke buffer 
                 // yang nantinya akan di lakukan
                 // printing ke file
+                finalResult.append("\n");
                 finalResult.append("Dapat dilihat bahwa matrix memiliki solusi unik yaitu:\n");
 
                 // Melakukan printing pada terminal
@@ -337,15 +338,6 @@ public class Interpolasi
                 System.out.println("2. Tidak\n");
                 inputUji = input.nextInt();
 
-                // Saving ke buffer
-                outputTxt.append("\n");
-                outputTxt.append("Apakah masih ingin melakukan tafsiran?");
-                outputTxt.append("\n");
-                outputTxt.append("1. Ya");
-                outputTxt.append("\n");
-                outputTxt.append("2. Tidak");
-                outputTxt.append("\n");
-                outputTxt.append(inputUji);
 
                 if (inputUji == 2){
                     uji = false;

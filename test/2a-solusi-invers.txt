@@ -4,4 +4,4 @@
 -1.0 2.0 -4.0 1.0 1.0
 3.0 0.0 0.0 -3.0 -3.0
 ---------------------
-Karena matrix di atas tidak memiliki balikan, tidak ada solusi yang memenuhi.
+Karena matrix di atas tidak memiliki balikan, SPL tidak memiliki solusi unik.

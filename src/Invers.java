@@ -475,7 +475,7 @@ public class Invers
 
             if (!M.isIdentitas())
             {
-                System.out.print("Karena ada baris bernilai 0, matrix tidak memiliki balikan");
+                System.out.print("Karena ada baris bernilai 0, maka matrix tidak memiliki balikan");
                 finalResult.append("Karena ada baris bernilai 0, maka matrix tidak memiliki balikan.");   
             }
             else
