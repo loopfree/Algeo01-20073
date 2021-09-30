@@ -16,3 +16,9 @@
 3. Buka folder repo ini
 4. Ketikkan `cd bin`
 5. Ketikkan `java Menu`
+
+## Ucapan Terima Kasih Kepada
+* Dr. Judhi S. Santoso (Dosen K1 IF2123 Tahun 2021/2022)
+* Dr. Rinaldi Munir (Dosen K2 IF2123 Tahun 2021/2022)
+* Dr. Rila Mandala (Dosen K3 IF2123 Tahun 2021/2022)
+* Semua Asisten IF2123 Tahun 2021/2022
