@@ -44,5 +44,5 @@ Masukkan nilai x yang akan ditaksir: 8.323
 Hasil tafsiran nilai fungsi adalah 36307.31640625
 Masukkan nilai x yang akan ditaksir: 9.167
 Hasil tafsiran nilai fungsi adalah -667858.1171875
-Masukkan nilai x yang akan ditaksir: 10.484
-Hasil tafsiran nilai fungsi adalah -1.4889114283125E9
+Masukkan nilai x yang akan ditaksir: 7.645
+Hasil tafsiran nilai fungsi adalah 44141.080078125
