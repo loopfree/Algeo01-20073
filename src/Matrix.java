@@ -226,36 +226,30 @@ public class Matrix
 		}
 	}
 
-	// Menukar baris apabila matrix dengan baris i 
-	// dan kolom j bernilai 0
-	public int swapBarisII0(int i,int j)
-	{
-        if (this.getElmt(i,j) == 0)
-        {
-            boolean found = false;
-            int ans = 0;
-            for (int l = i; ((l < this.getBaris()) && !found); l++)
-            {
-                ans = l;
-                if (this.getElmt(l,j) != 0) found = true;
-            }
-            if (found)
-            {
-                this.swapBaris(i,ans);
-                return ans;
-            }
-            else 
-            {
-            	return -1;
-            }
-        }
-        else
-        {
-        	return -1;
-        }
-    }
+    // NOTE
 
-    // Fungsi bantuan untuk fungsi mengecek
+    // Memiliki Solusi Unik
+    // 0           | a
+    // .           | b
+    // .  .        | c
+    // .    .      | d
+    // 0 . . . 0 1 | e
+
+    // Memiliki Banyak Solusi
+    // 0           | a
+    // .           | b
+    // .  .        | c
+    // .    .      | d
+    // 0 . . . 0 0 | 0
+
+    // Tidak Memiliki Solusi
+    // 0           | a
+    // .           | b
+    // .  .        | c
+    // .    .      | d
+    // 0 . . . 0 0 | e
+
+	// Fungsi bantuan untuk fungsi mengecek
     // suatu matrix memiliki solusi atau tidak
     public boolean solvableHelper(int brs)
     {
